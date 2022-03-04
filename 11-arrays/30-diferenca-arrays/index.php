@@ -1,0 +1,13 @@
+<?php
+    $arr1 = [1,2,3];
+    $arr2 = [4,5,6,2];
+
+    $diff = array_diff($arr1, $arr2);
+
+    print_r($diff);
+    echo "<br>";
+
+    $diff2 = array_diff($arr2, $arr1);
+
+    print_r($diff2);
+    echo "<br>";
