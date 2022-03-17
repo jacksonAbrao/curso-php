@@ -2,7 +2,6 @@
     width: 50px;
 }
 
-
 #main-title {
     text-align: center;
     margin: 15px 0 30px;
@@ -41,6 +40,10 @@
     color: #007bff;
 }
 
+.delete-form {
+    display: inline-block;
+}
+
 .delete-btn {
     background-color: transparent;
     border: none;
@@ -64,4 +67,50 @@
     max-width: 500px;
     margin: 0 auto;
     margin-top: 30px;
+}
+
+/* SHOW */
+
+#view-contact-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+#back-link-container {
+    display: block;
+    max-width: 500px;
+    margin: 30px auto 0;
+}
+
+#back-link {
+    border: 1px solid #007bff;
+    color: #007bff;
+    border-radius: 4px;
+    padding: 5px 10px;
+    transition: .5s;
+}
+
+#back-link:hover {
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* CREATE e EDIT */
+
+#create-form,
+#edit-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* mobile */
+@media (max-width: 480px) {
+    #home-link {
+        display: none;
+    }
 }
