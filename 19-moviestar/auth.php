@@ -41,8 +41,8 @@
                         <input type="password" name="password" id="password" class="form-control" placeholder="Senha" required>
                     </div>
                     <div class="form-group">
-                        <label for="confirm-password">Confirmar Senha</label>
-                        <input type="password" name="confirm-password" id="confirm-password" class="form-control" placeholder="Confirmar Senha" required>
+                        <label for="confirmPassword">Confirmar Senha</label>
+                        <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Confirmar Senha" required>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn card-btn" value="Criar Conta">
