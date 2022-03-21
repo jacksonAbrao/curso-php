@@ -30,7 +30,18 @@
 
                     // Criação de token e senha
                     $userToken = $user->generateToken();
-                    $finalPassword = password_hash($password, PASSWORD_DEFAULT);
+                    $finalPassword = $user->generatePassword($password);
+
+                    $user->name = $name;
+                    $user->lastname = $lastName;
+                    $user->email = $email;
+                    $user->password = $finalPassword;
+                    $user->token = $userToken;
+
+                    $auth = true;
+
+                    $userDao->create($user, $auth);
+
                 } else {
                     $message->setMessage("E-mail já cadastrado!", "error", "back");
                 }
@@ -44,5 +55,15 @@
         }
 
     } else if ($type === "login") {
+        
+        $email = filter_input(INPUT_POST, "email");
+        $password = filter_input(INPUT_POST, "password");
 
+        if($userDao->authenticateUser($email, $password)) {
+            $message->setMessage("Seja bem vindo!", "success", "editprofile.php");
+        } else {
+            $message->setMessage("Usuário e/ou senha incorretos.", "error", "back");
+        }
+    } else {
+        $message->setMessage("Informações inválidas!", "error", "index.php");
     }
