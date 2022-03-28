@@ -15,10 +15,6 @@
             <input type="text" class="form-control" id="phone" name="phone" placeholder="Digite o telefone" required>
         </div>
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Digite o email" required>
-        </div>
-        <div class="form-group">
             <label for="observations">Observações:</label>
             <textarea class="form-control" id="observations" name="observations" rows="3"></textarea>
         </div>
