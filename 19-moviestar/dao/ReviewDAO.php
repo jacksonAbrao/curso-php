@@ -3,6 +3,7 @@
     require_once("models/Review.php");
     require_once("models/Message.php");
     require_once("dao/UserDAO.php");
+    require_once("dao/MovieDAO.php");
 
 
     class ReviewDAO implements ReviewDAOInterface {
@@ -23,17 +24,95 @@
             $reviewObject->review = $data['review'];
             $reviewObject->users_id = $data['users_id'];
             $reviewObject->movie_id = $data['movies_id'];
+
+            return $reviewObject;
         }
+        
         public function create(Review $review){
+            $stmt = $this->conn->prepare(
+                "INSERT INTO reviews (
+                        rating, review, movies_id, users_id
+                    ) VALUES (
+                        :rating, :review, :movies_id, :users_id
+                    )"
+            );
+
+            $stmt->bindParam(":rating", $review->rating);
+            $stmt->bindParam(":review", $review->review);
+            $stmt->bindParam(":movies_id", $review->movies_id);
+            $stmt->bindParam(":users_id", $review->users_id);
+
+            $stmt->execute();
+
+            $this->message->setMessage("Critica adicionada com sucesso", "success", "back");
 
         }
         public function getMoviesReview($id){
 
-        }
-        public function hasMoviesReview($id, $user_id){
+            $reviews = [];
 
+            $stmt = $this->conn->prepare("SELECT * FROM reviews WHERE movies_id = :movies_id");
+
+            $stmt->bindParam(":movies_id", $id);
+
+            $stmt->execute();
+
+            if($stmt->rowCount() > 0) {
+                $reviewsData = $stmt->fetchAll();
+
+                $userDao = new UserDAO($this->conn, $this->url);
+
+                foreach($reviewsData as $review) {
+                    $reviewObject = $this->buildReview($review);
+
+                    // chama dados do usuário
+                    $user = $userDao->findById($reviewObject->users_id);
+
+                    $reviewObject->user = $user;
+
+                    $reviews[] = $reviewObject;
+                }
+            }
+            return $reviews;
+        }
+        public function hasAlreadyReviewed($id, $user_id){
+                
+            $stmt = $this->conn->prepare("SELECT * FROM reviews WHERE movies_id = :movies_id AND users_id = :users_id");
+
+            $stmt->bindParam(":movies_id", $id);
+            $stmt->bindParam(":users_id", $user_id);
+
+            $stmt->execute();
+
+            if($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
         public function getRatings($id){
 
+            $stmt = $this->conn->prepare("SELECT * FROM reviews WHERE movies_id = :movies_id");
+
+            $stmt->bindParam(":movies_id", $id);
+
+            $stmt->execute();
+
+            if($stmt->rowCount() > 0) {
+
+                $rating = 0;
+
+                $reviews = $stmt->fetchAll();
+
+                foreach($reviews as $review) {
+                    $rating += $review['rating'];
+                }
+                $rating = $rating / count($reviews);
+
+            } else {
+                $rating = "Não avaliado";
+            }
+
+            return $rating;
         }
     }

@@ -35,9 +35,9 @@ $userMovies = $movieDao->getMoviesByUserId($userData->id);
             <tbody>
                 <?php foreach ($userMovies as $movie) : ?>
                     <tr>
-                        <td scope="row"><?= $movie->id ?></td>
-                        <td><a href="<?= $BASE_URL ?>movie.php?id=<?= $movie->id ?>" class="table-movie-title"><?= $movie->title ?></a></td>
-                        <td><i class="fas fa-star"></i><span> 9.5</span></td>
+                        <td data-title="#" scope="row"><?= $movie->id ?></td>
+                        <td data-title="Título"><a href="<?= $BASE_URL ?>movie.php?id=<?= $movie->id ?>" class="table-movie-title"><?= $movie->title ?></a></td>
+                        <td data-title="Nota" class="d-block"><i class="fas fa-star"></i> <?= $movie->rating ?></td>
                         <td class="actions-column">
                             <a href="<?= $BASE_URL ?>editmovie.php?id=<?= $movie->id ?>" class="edit-btn"><i class="far fa-edit"></i> Editar</a>
                             <form action="<?= $BASE_URL ?>movie_process.php" method="POST">
@@ -53,4 +53,4 @@ $userMovies = $movieDao->getMoviesByUserId($userData->id);
     </div>
 </div>
 
-<?php include_once("templates/footer.php"); ?>
+<?php require_once("templates/footer.php"); ?>

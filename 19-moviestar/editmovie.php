@@ -54,7 +54,7 @@ if ($movie->image == "") {
                         <label for="category">Categoria</label>
                         <select name="category" id="category" class="form-control">
                             <option value="">Selecione uma categoria</option>
-                            <option value="Ação <?= $movie->category === "Ação" ? "selected" : "" ?>">Ação</option>
+                            <option value="Ação" <?= $movie->category === "Ação" ? "selected" : "" ?>>Ação</option>
                             <option value="Aventura" <?= $movie->category === "Aventura" ? "selected" : "" ?>>Aventura</option>
                             <option value="Comédia" <?= $movie->category === "Comédia" ? "selected" : "" ?>>Comédia</option>
                             <option value="Drama" <?= $movie->category === "Drama" ? "selected" : "" ?>>Drama</option>

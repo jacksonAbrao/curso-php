@@ -13,6 +13,6 @@
         public function buildReview($data);
         public function create(Review $review);
         public function getMoviesReview($id);
-        public function hasMoviesReview($id, $user_id);
+        public function hasAlreadyReviewed($id, $user_id);
         public function getRatings($id);
     }

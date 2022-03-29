@@ -18,13 +18,13 @@
                 </li>
             </ul>
         </div>
-        <div id="footer-links-container">
+        <!-- <div id="footer-links-container">
             <ul>
                 <li><a href="<?= $BASE_URL ?>">Adicionar filme</a></li>
                 <li><a href="<?= $BASE_URL ?>">Adicionar crítica</a></li>
                 <li><a href="<?= $BASE_URL ?>">Entrar / Registrar</a></li>
             </ul>
-        </div>
+        </div> -->
         <p>&copy; 2022 Jackson Abrão</p>
     </footer>
 </body>
