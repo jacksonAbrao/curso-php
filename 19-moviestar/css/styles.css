@@ -606,7 +606,37 @@
         width: 100%;
         max-width: 100%;
     }
+}
 
+.rating {
+    float: left;
+    border: none ;
+}
 
+.rating > input {
+    display: none;
+}
 
+.rating > label {
+    display: flex;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    float: right;
+    margin: 0px;
+    background-color: white;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    background-color: #ffd109 !important;
+    cursor: pointer;
+}
+
+.rating > input:checked + label:hover,
+.rating > label:hover + input:checked ~ label,
+.rating > input:checked ~ label:hover ~ label {
+    background-color: #ffd109;
+    cursor: pointer;
 }

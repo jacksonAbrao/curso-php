@@ -66,7 +66,7 @@ $movieReviews = $reviewDao->getMoviesReview($id);
         <div class="offset-md-1 col-md-10" id="reviews-container">
             <h3 id="reviews-title">Avaliações:</h3>
             <!-- verifica se habilita a review para o usuário ou não -->
-            <?php if (!empty($userData) && !$userOwnsMovie && !$alreadyReviewed): ?>
+            <?php if (!empty($userData) && !$userOwnsMovie && !$alreadyReviewed) : ?>
                 <div class="col-md-12" id="review-form-container">
                     <h4>Envie sua avaliação:</h4>
                     <p class="page-description">Preencha o formulário com sua avaliação com a nota e comentário sobre o filme </p>
@@ -74,7 +74,7 @@ $movieReviews = $reviewDao->getMoviesReview($id);
                         <input type="hidden" name="type" value="create">
                         <input type="hidden" name="movies_id" value="<?= $movie->id ?>">
                         <div class="form-group">
-                            <label for="rating">Nota:</label>
+                            <!-- <label for="rating">Nota:</label>
                             <select name="rating" id="rating" class="form-control">
                                 <option value="" selected>Selecione uma nota</option>
                                 <option value="1">1</option>
@@ -87,7 +87,18 @@ $movieReviews = $reviewDao->getMoviesReview($id);
                                 <option value="8">8</option>
                                 <option value="9">9</option>
                                 <option value="10">10</option>
-                            </select>
+                            </select> -->
+
+                            <div class="form-group">
+                                <fieldset class="rating" id="rating">
+                                    <input type="radio" name="rating_1" value="5"><label class="full" for="rating_1"></label>
+                                    <input type="radio" name="rating_2" value="4"><label class="full" for="rating_2"></label>
+                                    <input type="radio" name="rating_3" value="3"><label class="full" for="rating_3"></label>
+                                    <input type="radio" name="rating_4" value="2"><label class="full" for="rating_4"></label>
+                                    <input type="radio" name="rating_5" value="1"><label class="full" for="rating_5"></label>
+                                </fieldset>
+                                <br>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="review">Comentário:</label>
@@ -98,15 +109,21 @@ $movieReviews = $reviewDao->getMoviesReview($id);
                 </div>
             <?php endif; ?>
             <!-- Comentários -->
-            <?php foreach($movieReviews as $review) : ?>
+            <?php foreach ($movieReviews as $review) : ?>
                 <?php require("templates/user_review.php"); ?>
             <?php endforeach; ?>
-            <?php if(count($movieReviews) == 0) : ?>
+            <?php if (count($movieReviews) == 0) : ?>
                 <p class="empty-list">Nenhuma avaliação encontrada</p>
             <?php endif; ?>
         </div>
     </div>
 </div>
-
+<script>
+    $("label").click(function() {
+        $(this).parent().find("label").css("background-color", "#ccc");
+        $(this).css("background-color", "#ffd109");
+        $(this).nextAll().css("background-color", "#ffd109");
+    });
+</script>
 
 <?php require_once("templates/footer.php"); ?>
